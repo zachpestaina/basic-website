@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Practice Site</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        .greeting {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+        .info-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .info-box h2 {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .info-box p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .status {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+        .tech-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        .tech-list li {
+            padding: 8px 0;
+            color: #555;
+            border-bottom: 1px solid #eee;
+        }
+        .tech-list li:last-child {
+            border-bottom: none;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #999;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Deployment Practice</h1>
+        <div class="greeting">Hello, World!</div>
+        
+        <div class="status">Site Successfully Deployed</div>
+        
+        <div class="info-box">
+            <h2>About This Site</h2>
+            <p>
+                This is a simple static website built to practice deployment workflows 
+                and cloud infrastructure. No fancy features, just a straightforward HTML/CSS 
+                page to test deployment pipelines.
+            </p>
+        </div>
+        
+        <div class="info-box">
+            <h2>Deployment Stack</h2>
+            <ul class="tech-list">
+                <li>HTML/CSS Frontend</li>
+                <li>Flask Backend</li>
+                <li>AWS Cloud Platform</li>
+                <li>CI/CD Pipeline</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h2>Purpose</h2>
+            <p>
+                This site exists purely as a learning exercise for deploying applications 
+                to the cloud. It demonstrates that the deployment infrastructure is working 
+                correctly and can serve content to the web.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>Built for AWS deployment practice | 2025</p>
+        </div>
+    </div>
+</body>
+</html>
