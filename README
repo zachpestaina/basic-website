@@ -1,0 +1,1 @@
+This repository contains a basic Flask server which serves a simple HTML file. The intention of this repository is to gain additional practice setting up a CI/CD pipeline and deploying applications to AWS using SparkleFormation.
