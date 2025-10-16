@@ -50,7 +50,7 @@ pipeline {
                     sh """
                         ${DOCKER_CMD} run -d \
                         --name ${CONTAINER_NAME} \
-                        -p 5000:5000
+                        -p 5000:5000 \
                         --restart unless-stopped \
                         ${DOCKER_IMAGE}:latest
                     """
