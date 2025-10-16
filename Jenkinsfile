@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        DOCKER_CMD = "/Users/zach/.docker/bin/docker"
         DOCKER_IMAGE = "zachpestaina/basic-website-flask-app"
         DOCKER_TAG = "${BUILD_NUMBER}"
         CONTAINER_NAME = "flask-app-prod"
@@ -28,8 +29,8 @@ pipeline {
             steps {
                 script {
                     echo 'Building Docker image...'
-                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-                    sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}"
+                    sh "${DOCKER_CMD} build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                    sh "${DOCKER_CMD} tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}"
                 }
             }
         }
@@ -39,8 +40,8 @@ pipeline {
                 script {
                     echo 'Pushing to Docker Hub...'
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-                        sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"}
-                        sh "docker push ${DOCKER_IMAGE}:latest"
+                        sh "${DOCKER_CMD} push ${DOCKER_IMAGE}:${DOCKER_TAG}"}
+                        sh "${DOCKER_CMD} push ${DOCKER_IMAGE}:latest"
                 }
             }
         }
@@ -52,13 +53,13 @@ pipeline {
 
                     // Stop and remove old container
                     sh """
-                        docker stop ${CONTAINER_NAME} || true
-                        docker rum ${CONTAINER_NAME} || true
+                        ${DOCKER_CMD} stop ${CONTAINER_NAME} || true
+                        ${DOCKER_CMD} run ${CONTAINER_NAME} || true
                     """
 
                     // Run new container
                     sh """
-                        docker run -d \
+                        ${DOCKER_CMD} run -d \
                         --name ${CONTAINER_NAME} \
                         -p 5000:5000
                         --restart unless-stopped \
@@ -78,7 +79,7 @@ pipeline {
             echo 'Pipeline failed! Check logs.'
         }
         always {
-            sh 'docker image prune -f'
+            sh "${DOCKER_CMD} image prune -f"
         }
     }
 }
