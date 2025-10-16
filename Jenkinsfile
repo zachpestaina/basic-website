@@ -3,7 +3,7 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            step {
+            steps {
                 echo 'Checking out code...'
 
                 sh 'ls -la'
