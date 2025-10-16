@@ -38,10 +38,21 @@ pipeline {
         stage('Push to Registry') {
             steps {
                 script {
-                    echo 'Pushing to Docker Hub...'
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-                        sh "${DOCKER_CMD} push ${DOCKER_IMAGE}:${DOCKER_TAG}"}
-                        sh "${DOCKER_CMD} push ${DOCKER_IMAGE}:latest"
+                    withCredentials([
+                        usernamePassword(
+                            credentialsId: 'dockerhub-credentials',
+                            usrnameVariable: 'DOCKER_USER',
+                            passwordVariable: 'DOCKER_PASS'
+                        )
+                    ]) {
+                        echo 'Pushing to Docker Hub...'
+                        sh """
+                            echo "${DOCKER_PASS}" | ${DOCKER_CMD} login -u "${DOCKER_USER}" --password-stdin
+                            ${DOCKER_CMD} push ${DOCKER_IMAGE}:${DOCKER_TAG}
+                            ${DOCKER_CMD} push ${DOCKER_IMAGE}:latest
+                            ${DOCKER_CMD} logout
+                        """
+                    }
                 }
             }
         }
